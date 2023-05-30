@@ -31,13 +31,13 @@ class Library:
         for reader in self.list_of_readers:
             if reader.id == reader_id:
                 return reader
-
+        return print("reader don't exsist")
 
     def find_book(self, title):
         for book in self.list_of_books:
             if book.title == title:
                 return book
-        return None
+        return print("book don't exsist")
 
     def borrow_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
@@ -54,13 +54,12 @@ class Library:
             print("No available copies of the book.")
             return
 
-
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
         print("Book borrowed successfully.")
 
 
-test = Book("test","autor","wydawnictwo", 2020, 5)
+test = Book("test", "autor", "wydawnictwo", 2020, 5)
 library = Library()
 library.show_books()
 library.add_book(test)
@@ -71,3 +70,4 @@ library.add_reader(r)
 library.borrow_book(1, "test")
 library.show_readers()
 library.show_books()
+library.find_reader(1)

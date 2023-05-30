@@ -12,5 +12,3 @@ class Book:
               f"Quantity: {self.quantity}\nAvailable_quantity: {self.available_quantity}")
 
 
-test = Book("test", "autor", "wydawnictwo", 2020, 5)
-test.display()
