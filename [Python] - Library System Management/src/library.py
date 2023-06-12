@@ -63,9 +63,6 @@ class Library:
             return print("Reader not found in the library.")
 
         book = self.find_book(title)
-        # if not book:
-        #     return print("Book not found in the library.")
-
         if book not in reader.borrowed_books:
             return print("This book is not borrowed.")
 
@@ -74,18 +71,18 @@ class Library:
         print("Book returned successfully.")
 
 
-test = Book("test", "autor", "wydawnictwo", 2020, 5)
-library = Library()
-library.show_books()
-library.add_book(test)
+# test = Book("test", "autor", "wydawnictwo", 2020, 5)
+# library = Library()
 # library.show_books()
+# library.add_book(test)
+# # library.show_books()
+# # library.show_readers()
+# r = Reader("marek", "xXx")
+# # l = Reader("xXx", "testowy")
+# library.add_reader(r)
+# # library.add_reader(l)
+# library.borrow_book(1, "test")
+# print("++++++++++++++++++++++")
 # library.show_readers()
-r = Reader("marek", "xXx")
-# l = Reader("xXx", "testowy")
-library.add_reader(r)
-# library.add_reader(l)
-library.borrow_book(1, "test")
-print("++++++++++++++++++++++")
-library.show_readers()
-library.show_books()
-# library.find_reader(1)
+# library.show_books()
+# # library.find_reader(1)
