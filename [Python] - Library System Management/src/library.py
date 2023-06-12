@@ -30,44 +30,62 @@ class Library:
     def find_reader(self, reader_id):
         for reader in self.list_of_readers:
             if reader.id == reader_id:
+                # reader.display()
                 return reader
-        return print("reader don't exsist")
+        return None
 
     def find_book(self, title):
         for book in self.list_of_books:
             if book.title == title:
+                # book.display()
                 return book
-        return print("book don't exsist")
+        return None
 
     def borrow_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
-            print("Reader not found in the library.")
-            return
+            return print("Reader not found in the library.")
 
         book = self.find_book(title)
         if not book:
-            print("Book not found in the library.")
-            return
+            return print("Book not found in the library.")
 
         if book.available_quantity == 0:
-            print("No available copies of the book.")
-            return
+            return print("No available copies of the book.")
 
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
         print("Book borrowed successfully.")
+
+    def return_book(self, reader_id, title):
+        reader = self.find_reader(reader_id)
+        if not reader:
+            return print("Reader not found in the library.")
+
+        book = self.find_book(title)
+        # if not book:
+        #     return print("Book not found in the library.")
+
+        if book not in reader.borrowed_books:
+            return print("This book is not borrowed.")
+
+        book.available_quantity += 1
+        reader.borrowed_books.remove(book)
+        print("Book returned successfully.")
 
 
 test = Book("test", "autor", "wydawnictwo", 2020, 5)
 library = Library()
 library.show_books()
 library.add_book(test)
-library.show_books()
-library.show_readers()
-r = Reader(1, "marek", "xXx")
+# library.show_books()
+# library.show_readers()
+r = Reader("marek", "xXx")
+# l = Reader("xXx", "testowy")
 library.add_reader(r)
+# library.add_reader(l)
 library.borrow_book(1, "test")
+print("++++++++++++++++++++++")
 library.show_readers()
 library.show_books()
-library.find_reader(1)
+# library.find_reader(1)

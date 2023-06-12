@@ -1,6 +1,9 @@
 class Reader:
-    def __init__(self, id, name, last_name):
-        self.id = id
+    start_id = 0
+
+    def __init__(self, name, last_name):
+        Reader.start_id += 1
+        self.id = Reader.start_id
         self.name = name
         self.last_name = last_name
         self.borrowed_books = []
