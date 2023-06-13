@@ -1,4 +1,5 @@
-from library import Library, Reader
+from library import Library
+from reader import Reader
 from book import Book
 
 
@@ -82,7 +83,19 @@ class LibrarySystem:
             self.library.return_book(id, title)
 
     def books_reservation(self):
-        pass
+        action = input("What do you want to do:\n1. Make reservation\n2. Cancel reservation\n3. Show reservation\n")
+        if action == "1":
+            id = int(input("Give reader id: "))
+            title = input("Give book title: ")
+            self.library.reservation_book(id, title)
+        elif action == "2":
+            id = int(input("Give reader id: "))
+            title = input("Give book title: ")
+            self.library.cancel_reservation(id, title)
+        elif action == "3":
+            self.library.show_reservations()
+
+
 
     def main(self):
         self.run()

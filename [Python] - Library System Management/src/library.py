@@ -1,11 +1,9 @@
-from book import Book
-from reader import Reader
-
 
 class Library:
     def __init__(self):
         self.list_of_books = []
         self.list_of_readers = []
+        self.list_of_reservation = []
 
     def add_book(self, book):
         self.list_of_books.append(book)
@@ -41,6 +39,7 @@ class Library:
                 return book
         return None
 
+
     def borrow_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
@@ -71,6 +70,44 @@ class Library:
         reader.borrowed_books.remove(book)
         print("Book returned successfully.")
 
+    def reservation_book(self, reader_id, title):
+        reader = self.find_reader(reader_id)
+        if not reader:
+            return print("Reader not found in the library.")
+
+        book = self.find_book(title)
+        if not book:
+            return print("Book not found in the library.")
+
+        reader.reserved_books.append(book)
+        self.list_of_reservation.append((reader, reader.reserved_books))
+
+
+        print("Book reserved successfully.")
+
+    def cancel_reservation(self, reader_id, title):
+        reader = self.find_reader(reader_id)
+        if not reader:
+            return print("Reader not found in the library.")
+
+        book = self.find_book(title)
+        if book not in reader.reserved_books:
+            return print("This book is not reserved.")
+        reader.reserved_books.remove(book)
+        self.list_of_reservation = [(r, b) for r, b in self.list_of_reservation if
+                                    r != reader or b != book]
+
+        print("Book reservation has been cancelled.")
+
+    def show_reservations(self):
+        if not self.list_of_reservation:
+            print("No reservations in the library.")
+        else:
+            for reader, reserved_books in self.list_of_reservation:
+                print(f"{reader.name} {reader.last_name}:")
+                for book in reserved_books:
+                    print(book.title)
+                print()
 
 # test = Book("test", "autor", "wydawnictwo", 2020, 5)
 # library = Library()
