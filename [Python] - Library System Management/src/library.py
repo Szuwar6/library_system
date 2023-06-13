@@ -55,6 +55,7 @@ class Library:
 
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
+        reader.history_book.append(book)
         print("Book borrowed successfully.")
 
     def return_book(self, reader_id, title):
