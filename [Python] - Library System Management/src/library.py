@@ -1,12 +1,16 @@
-
+from datetime import datetime
 class Library:
     def __init__(self):
         self.list_of_books = []
         self.list_of_readers = []
         self.list_of_reservation = []
 
-    def add_book(self, book):
-        self.list_of_books.append(book)
+    def add_book(self, new_book):
+        for book in self.list_of_books:
+            if book.title == new_book.title and book.author == new_book.author:
+                return print("Book already in library")
+        self.list_of_books.append(new_book)
+        return "Book added"
 
     def add_reader(self, reader):
         self.list_of_readers.append(reader)
@@ -54,7 +58,8 @@ class Library:
 
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
-        reader.history_book.append(book)
+        borrow_date = datetime.now()
+        reader.history_book.append((book, borrow_date, None))
         print("Book borrowed successfully.")
 
     def return_book(self, reader_id, title):
@@ -69,6 +74,14 @@ class Library:
         book.available_quantity += 1
         reader.borrowed_books.remove(book)
         print("Book returned successfully.")
+        return_date = datetime.now()
+        for i, (borrowed_book, borrow_date, _) in enumerate(reader.history_book):
+            if borrowed_book == book:
+                reader.history_book[i] = (borrowed_book, borrow_date, return_date)
+                borrowed_days = (return_date - borrow_date).days
+                if borrowed_days > 10:
+                    print(f"You have to pay {borrowed_days * 10}zł for overdue")
+                break
 
     def reservation_book(self, reader_id, title):
         reader = self.find_reader(reader_id)

@@ -1,3 +1,4 @@
+from datetime import datetime
 class Reader:
     start_id = 0
 
@@ -21,5 +22,10 @@ class Reader:
         for book in self.reserved_books:
             print(book.title)
         print("History of borrowed books: ")
-        for book in self.history_book:
-            print(book.title)
+        for book, borrow_date, return_date in self.history_book:
+            if return_date is None:
+                print(
+                f"{book.title} : Date of borrow: {borrow_date.strftime('%Y-%m-%d')} - ")
+            else:
+                print(
+                    f"{book.title} : Date of borrow: {borrow_date.strftime('%Y-%m-%d')} - {return_date.strftime('%Y-%m-%d')}")
