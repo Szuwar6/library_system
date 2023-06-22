@@ -29,3 +29,6 @@ class Reader:
             else:
                 print(
                     f"{book.title} : Date of borrow: {borrow_date.strftime('%Y-%m-%d')} - {return_date.strftime('%Y-%m-%d')}")
+
+    def notify(self):
+        print("ALERT!!!")

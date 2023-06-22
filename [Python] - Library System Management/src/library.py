@@ -1,4 +1,6 @@
 from datetime import datetime
+
+
 class Library:
     def __init__(self):
         self.list_of_books = []
@@ -76,7 +78,7 @@ class Library:
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
         borrow_date = datetime.now()
-        reader.history_book.append((book, borrow_date, None))
+        reader.history_book.append((book, borrow_date, None))  # .append(HistoryRecord(book, borrow_date, None))
         print("Book borrowed successfully.")
 
     def borrow_book_with_reservation(self, reader, book):
@@ -103,16 +105,23 @@ class Library:
     def return_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
-            return print("Reader not found in the library.")
+            print("Reader not found in the library.")
+            return
 
         book = self.find_book(title)
         if book not in reader.borrowed_books:
-            return print("This book is not borrowed.")
+            print("This book is not borrowed.")
+            return
 
         book.available_quantity += 1
         reader.borrowed_books.remove(book)
         print("Book returned successfully.")
+
+        self._calc_overdue_fee(reader, book)
+
+    def _calc_overdue_fee(self, reader, book):
         return_date = datetime.now()
+
         for i, (borrowed_book, borrow_date, _) in enumerate(reader.history_book):
             if borrowed_book == book:
                 reader.history_book[i] = (borrowed_book, borrow_date, return_date)
@@ -133,7 +142,6 @@ class Library:
         reader.reserved_books.append(book)
         self.list_of_reservation.append((reader, reader.reserved_books))
 
-
         print("Book reserved successfully.")
 
     def cancel_reservation(self, reader_id, title):
@@ -153,12 +161,13 @@ class Library:
     def show_reservations(self):
         if not self.list_of_reservation:
             print("No reservations in the library.")
-        else:
-            for reader, reserved_books in self.list_of_reservation:
-                print(f"{reader.name} {reader.last_name}:")
-                for book in reserved_books:
-                    print(book.title)
-                print()
+            return
+
+        for reader, reserved_books in self.list_of_reservation:
+            print(f"{reader.name} {reader.last_name}:")
+            for book in reserved_books:
+                print(book.title)
+            print()
 
 # test = Book("test", "autor", "wydawnictwo", 2020, 5)
 # library = Library()

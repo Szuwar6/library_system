@@ -9,7 +9,7 @@ class LibrarySystem:
         self.library = Library()
         test = Book("test", "autor", "wydawnictwo", 2020, 5)
         self.library.add_book(test)
-        zero = Book("zero" , "zero", "zero", 2000, 0)
+        zero = Book("zero", "zero", "zero", 2000, 0)
         self.library.add_book(zero)
         r = Reader("marek", "xXx")
         l = Reader("xXx", "testowy")
@@ -38,24 +38,25 @@ class LibrarySystem:
             else:
                 print("Invalid action. Please try again.")
 
+    def _add_book(self):
+        title = input("Title: ")
+        author = input("Author: ")
+        publisher = input("Publisher: ")
+        year = int(input("Year: "))
+        quantity = int(input("Quantity: "))
+        book = Book(title, author, publisher, year, quantity)
+        self.library.add_book(book)
+
     def books_service(self):
         action = input("What do you want to do:\n1. Add book\n2. Find book\n3. Show all books\n")
         if action == "1":
-            title = input("Title: ")
-            author = input("Author: ")
-            publisher = input("Publisher: ")
-            year = int(input("Year: "))
-            quantity = int(input("Quantity: "))
-            book = Book(title, author,publisher,year,quantity)
-            self.library.add_book(book)
+            self._add_book()
         elif action == "2":
             title = input("Give a title: ")
             book = self.library.find_book(title)
             return book.display()
         elif action == "3":
             self.library.show_books()
-
-
 
     def readers_service(self):
         action = input("What do you want to do:\n1. Add Reader\n2. Find Reader\n3. Show all Readers\n")
@@ -73,13 +74,12 @@ class LibrarySystem:
         elif action == "3":
             self.library.show_readers()
 
-
     def books_borrow(self):
         action = input("What do you want to do:\n1. Borrow book\n2. Return book\n")
         if action == "1":
             id = int(input("Give reader id: "))
             title = input("Give book title: ")
-            self.library.borrow_book(id,title)
+            self.library.check_if_reader_have_reservation(id, title)
         elif action == "2":
             id = int(input("Give reader id: "))
             title = input("Give book title: ")
@@ -97,10 +97,3 @@ class LibrarySystem:
             self.library.cancel_reservation(id, title)
         elif action == "3":
             self.library.show_reservations()
-
-
-
-    def main(self):
-        self.run()
-
-
