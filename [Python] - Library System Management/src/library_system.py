@@ -1,6 +1,7 @@
 from library import Library
 from reader import Reader
 from book import Book
+import datetime
 
 
 class LibrarySystem:
@@ -14,6 +15,8 @@ class LibrarySystem:
         l = Reader("xXx", "testowy")
         self.library.add_reader(r)
         self.library.add_reader(l)
+        l.history_book.append((test, datetime.datetime(2023, 6, 10, 0, 0, 0) , None))
+        l.borrowed_books.append(test)
 
     def run(self):
         executable_option = {

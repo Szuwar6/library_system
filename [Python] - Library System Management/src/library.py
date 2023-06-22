@@ -44,7 +44,7 @@ class Library:
         return None
 
 
-    def borrow_book(self, reader_id, title):
+    def check_if_reader_have_reservation(self,reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
             return print("Reader not found in the library.")
@@ -53,14 +53,52 @@ class Library:
         if not book:
             return print("Book not found in the library.")
 
+        has_reserved_book = False
+        for reservation in self.list_of_reservation:
+            reserved_reader, reserved_books = reservation
+            if reserved_reader == reader and book in reserved_books:
+                has_reserved_book = True
+                break
+
+        if has_reserved_book:
+            return self.borrow_book_with_reservation(reader, book)
+
+        return self.borrow_book_without_reservation(reader, book)
+    def borrow_book_without_reservation(self, reader, book):
+
         if book.available_quantity == 0:
             return print("No available copies of the book.")
+
+        if book.available_quantity <= self.count_books_by_title(book.title):
+            return print("No available copies of the book.")
+
 
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
         borrow_date = datetime.now()
         reader.history_book.append((book, borrow_date, None))
         print("Book borrowed successfully.")
+
+    def borrow_book_with_reservation(self, reader, book):
+
+        if book.available_quantity == 0:
+            return print("No available copies of the book.")
+
+        book.available_quantity -= 1
+        reader.borrowed_books.append(book)
+        borrow_date = datetime.now()
+        reader.history_book.append((book, borrow_date, None))  # .append(HistoryRecord(book, borrow_date, None))
+        reader.reserved_books.remove(book)
+        print("Book borrowed successfully.")
+
+    def count_books_by_title(self, title):
+        count = 0
+        for reservation in self.list_of_reservation:
+            reserved_books = reservation[1]
+            for book in reserved_books:
+                if book.title == title:
+                    count += 1
+        return count
 
     def return_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
@@ -79,7 +117,7 @@ class Library:
             if borrowed_book == book:
                 reader.history_book[i] = (borrowed_book, borrow_date, return_date)
                 borrowed_days = (return_date - borrow_date).days
-                if borrowed_days > 10:
+                if borrowed_days > -1:
                     print(f"You have to pay {borrowed_days * 10}zł for overdue")
                 break
 
