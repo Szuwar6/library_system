@@ -15,9 +15,7 @@ class Book:
     def __post_init__(self):
         self.available_quantity = self.quantity
 
-    def notify_borrower(self):
-        for borrower in self.borrowers:
-            borrower.notify()
+
 
     def display(self):
         print(f"Title: {self.title}\nAuthor: {self.author}\nPublisher: {self.publisher}\nYear: {self.year}\n" \

@@ -1,6 +1,7 @@
 from datetime import datetime
 
 
+
 class Library:
     def __init__(self):
         self.list_of_books = []
@@ -118,6 +119,8 @@ class Library:
         print("Book returned successfully.")
 
         self._calc_overdue_fee(reader, book)
+        self.notify_borrower(book)
+
 
     def _calc_overdue_fee(self, reader, book):
         return_date = datetime.now()
@@ -126,10 +129,15 @@ class Library:
             if borrowed_book == book:
                 reader.history_book[i] = (borrowed_book, borrow_date, return_date)
                 borrowed_days = (return_date - borrow_date).days
-                if borrowed_days > -1:
+                if borrowed_days > 10:
                     print(f"You have to pay {borrowed_days * 10}zł for overdue")
                 break
-
+    def notify_borrower(self, book):
+        for reader, reserved_books in self.list_of_reservation:
+            for reserved_book in reserved_books:
+                if reserved_book == book:
+                    return print(f"Dear {reader.name} {reader.last_name} book {book.title} is returned")
+        return
     def reservation_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
