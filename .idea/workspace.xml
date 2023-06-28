@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="864d2bdd-857e-487a-ad24-2ad7538852cb" name="Changes" comment="Changes by Kacper">
-      <change beforePath="$PROJECT_DIR$/[Python] - Library System Management/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/library_system/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/[Python] - Library System Management/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/library_system/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/[Python] - Library System Management/src/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/library_system/src/book.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/[Python] - Library System Management/src/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/library_system/src/library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/[Python] - Library System Management/src/library_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/library_system/src/library_system.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/[Python] - Library System Management/src/reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/library_system/src/reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/[Python] - Library System Management/src/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/library_system/src/run.py" afterDir="false" />
-    </list>
+    <list default="true" id="864d2bdd-857e-487a-ad24-2ad7538852cb" name="Changes" comment="coding" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -260,7 +252,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687466593308</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="coding">
+      <created>1687977760852</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1687977760852</updated>
+    </task>
+    <task id="LOCAL-00011" summary="coding">
+      <created>1687977947255</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1687977947255</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,8 +281,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="coding" />
     <MESSAGE value="Changes by Kacper" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by Kacper" />
+    <MESSAGE value="coding" />
+    <option name="LAST_COMMIT_MESSAGE" value="coding" />
   </component>
 </project>
