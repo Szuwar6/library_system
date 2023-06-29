@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from reader import Reader
+from library_system.src.reader import Reader
 
 
 @dataclass

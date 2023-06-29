@@ -1,4 +1,3 @@
-from datetime import datetime
 class Reader:
     start_id = 0
 

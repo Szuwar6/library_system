@@ -3,7 +3,7 @@ from library_system.src.library import Library
 from library_system.src.reader import Reader
 
 
-def test_should_add_book():
+def test_should_borrow_book():
     library = Library()
     title = "test"
     author = "author"
@@ -12,8 +12,11 @@ def test_should_add_book():
     quantity = 1
     book = Book(title, author, publisher, year, quantity)
     library.add_book(book)
-    assert len(library.list_of_books) == 1
-    assert library.list_of_books[0] == book
-
-def test_addition():
-    assert 2 + 2 == 4
+    name = "John"
+    last_name = "Bravo"
+    reader = Reader(name, last_name)
+    library.add_reader(reader)
+    id = reader.id
+    title = book.title
+    library.check_if_reader_have_reservation(id,title)
+    assert book.available_quantity == 0

@@ -1,4 +1,4 @@
-from library_system import LibrarySystem
+from library_system.src.system_of_library import LibrarySystem
 
 
 def main():

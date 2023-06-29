@@ -50,11 +50,11 @@ class Library:
     def check_if_reader_have_reservation(self,reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
-            return print("Reader not found in the library.")
+            return "Reader not found in the library."
 
         book = self.find_book(title)
         if not book:
-            return print("Book not found in the library.")
+            return "Book not found in the library."
 
         has_reserved_book = False
         for reservation in self.list_of_reservation:

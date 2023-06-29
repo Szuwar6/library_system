@@ -1,7 +1,7 @@
-from library import Library
-from reader import Reader
-from book import Book
 import datetime
+from library_system.src.book import Book
+from library_system.src.library import Library
+from library_system.src.reader import Reader
 
 
 class LibrarySystem:
@@ -79,7 +79,7 @@ class LibrarySystem:
         if action == "1":
             id = int(input("Give reader id: "))
             title = input("Give book title: ")
-            self.library.check_if_reader_have_reservation(id, title)
+            print(self.library.check_if_reader_have_reservation(id, title))
         elif action == "2":
             id = int(input("Give reader id: "))
             title = input("Give book title: ")
