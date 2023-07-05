@@ -1,7 +1,6 @@
 from datetime import datetime
 
 
-
 class Library:
     def __init__(self):
         self.list_of_books = []
@@ -46,8 +45,7 @@ class Library:
                 return book
         return None
 
-
-    def check_if_reader_have_reservation(self,reader_id, title):
+    def check_if_reader_have_reservation(self, reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
             return print("Reader not found in the library.")
@@ -67,30 +65,30 @@ class Library:
             return self.borrow_book_with_reservation(reader, book)
 
         return self.borrow_book_without_reservation(reader, book)
-    def borrow_book_without_reservation(self, reader, book):
 
+    def borrow_book_without_reservation(self, reader, book):
         if book.available_quantity == 0:
             return print("No available copies of the book.")
 
         if book.available_quantity <= self.count_books_by_title(book.title):
             return print("No available copies of the book.")
 
-
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
         borrow_date = datetime.now()
-        reader.history_book.append((book, borrow_date, None))  # .append(HistoryRecord(book, borrow_date, None))
+        reader.history_book.append((book, borrow_date, None))
         print("Book borrowed successfully.")
 
     def borrow_book_with_reservation(self, reader, book):
-
         if book.available_quantity == 0:
             return print("No available copies of the book.")
 
         book.available_quantity -= 1
         reader.borrowed_books.append(book)
         borrow_date = datetime.now()
-        reader.history_book.append((book, borrow_date, None))  # .append(HistoryRecord(book, borrow_date, None))
+        reader.history_book.append(
+            (book, borrow_date, None)
+        )  # .append(HistoryRecord(book, borrow_date, None))
         reader.reserved_books.remove(book)
         print("Book borrowed successfully.")
 
@@ -106,13 +104,11 @@ class Library:
     def return_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
-            print("Reader not found in the library.")
-            return
+            return print("Reader not found in the library.")
 
         book = self.find_book(title)
         if book not in reader.borrowed_books:
-            print("This book is not borrowed.")
-            return
+            return print("This book is not borrowed.")
 
         book.available_quantity += 1
         reader.borrowed_books.remove(book)
@@ -120,7 +116,6 @@ class Library:
 
         self._calc_overdue_fee(reader, book)
         self.notify_borrower(book)
-
 
     def _calc_overdue_fee(self, reader, book):
         return_date = datetime.now()
@@ -131,13 +126,18 @@ class Library:
                 borrowed_days = (return_date - borrow_date).days
                 if borrowed_days > 10:
                     print(f"You have to pay {borrowed_days * 10}zł for overdue")
-                break
+                return borrowed_days * 10
+            break
+
     def notify_borrower(self, book):
         for reader, reserved_books in self.list_of_reservation:
             for reserved_book in reserved_books:
                 if reserved_book == book:
-                    return print(f"Dear {reader.name} {reader.last_name} book {book.title} is returned")
+                    return print(
+                        f"Dear {reader.name} {reader.last_name} book {book.title} is returned"
+                    )
         return
+
     def reservation_book(self, reader_id, title):
         reader = self.find_reader(reader_id)
         if not reader:
@@ -161,8 +161,9 @@ class Library:
         if book not in reader.reserved_books:
             return print("This book is not reserved.")
         reader.reserved_books.remove(book)
-        self.list_of_reservation = [(r, b) for r, b in self.list_of_reservation if
-                                    r != reader or b != book]
+        self.list_of_reservation = [
+            (r, b) for r, b in self.list_of_reservation if r != reader or b != book
+        ]
 
         print("Book reservation has been cancelled.")
 
@@ -176,19 +177,3 @@ class Library:
             for book in reserved_books:
                 print(book.title)
             print()
-
-# test = Book("test", "autor", "wydawnictwo", 2020, 5)
-# library = Library()
-# library.show_books()
-# library.add_book(test)
-# # library.show_books()
-# # library.show_readers()
-# r = Reader("marek", "xXx")
-# # l = Reader("xXx", "testowy")
-# library.add_reader(r)
-# # library.add_reader(l)
-# library.borrow_book(1, "test")
-# print("++++++++++++++++++++++")
-# library.show_readers()
-# library.show_books()
-# # library.find_reader(1)
